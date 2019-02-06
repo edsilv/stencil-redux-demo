@@ -1,19 +1,20 @@
 import { TypeKeys, ActionTypes } from '../actions/index';
+import { FullName } from '../FullName';
 
 interface AppState {
-  name: string;
+  fullName: FullName;
 }
 
 const getInitialState = () => {
   return {
-    name: 'Stencil Redux'
+    fullName: new FullName('Edward', 'John', 'Silverton')
   }
 };
 
 const app = (state: AppState = getInitialState(), action: ActionTypes) => {
   switch (action.type) {
-    case TypeKeys.APP_SET_NAME: {
-      return { ...state, name: action.name }
+    case TypeKeys.APP_SET_FULLNAME: {
+      return { ...state, fullName: action.fullName }
     }
   }
 

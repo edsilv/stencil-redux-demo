@@ -1,8 +1,10 @@
 import { Component, Prop, State } from '@stencil/core';
 import { Store, Action } from '@stencil/redux';
 
-import { appSetName } from '../../actions/app';
+import { appSetFullName } from '../../actions/app';
 import { configureStore } from '../../store/index';
+
+import { FullName } from '../../FullName';
 
 @Component({
   tag: 'my-app',
@@ -11,9 +13,9 @@ import { configureStore } from '../../store/index';
 export class MyApp {
   @Prop({ context: 'store' }) store: Store;
 
-  @State() name: string;
+  @State() fullName: FullName;
 
-  appSetName: Action;
+  appSetFullName: Action;
 
   componentWillLoad() {
     // Only do this once, in the root component
@@ -21,26 +23,26 @@ export class MyApp {
 
     this.store.mapStateToProps(this, (state) => {
       const {
-        app: { name }
+        app: { fullName }
       } = state;
 
       return {
-        name
+        fullName
       }
     });
 
     this.store.mapDispatchToProps(this, {
-      appSetName
+      appSetFullName
     });
   }
 
   render() {
+    console.log(this.fullName);
     return (
       <div>
-        Hello, my name is {this.name}
-
+        Hello, my full name is {this.fullName.toString()}
         <p>
-          <input type="text" onInput={(e: any) => this.appSetName(e.target.value)} value={this.name}/>
+          <input type="text" onInput={(e: any) => this.appSetFullName(e.target.value)} value={this.fullName.toString()}/>
         </p>
       </div>
     );
