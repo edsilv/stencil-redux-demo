@@ -1,7 +1,7 @@
 import { Component, Prop, State } from '@stencil/core';
 import { Store, Action } from '@stencil/redux';
 
-import { appSetFullName } from '../../actions/app';
+import { appSetFullName, appSetEmail } from '../../actions/app';
 import { configureStore } from '../../store/index';
 
 import { FullName } from '../../FullName';
@@ -14,8 +14,10 @@ export class MyApp {
   @Prop({ context: 'store' }) store: Store;
 
   @State() fullName: FullName;
+  @State() email: string;
 
   appSetFullName: Action;
+  appSetEmail: Action;
 
   componentWillLoad() {
     // Only do this once, in the root component
@@ -23,16 +25,16 @@ export class MyApp {
 
     this.store.mapStateToProps(this, (state) => {
       const {
-        app: { fullName }
+        app: { fullName, email }
       } = state;
 
       return {
-        fullName
+        fullName, email
       }
     });
 
     this.store.mapDispatchToProps(this, {
-      appSetFullName
+      appSetFullName, appSetEmail
     });
   }
 
@@ -40,9 +42,12 @@ export class MyApp {
     console.log(this.fullName);
     return (
       <div>
-        Hello, my full name is {this.fullName.toString()}
+        Hello, my full name is {this.fullName.toString()}, and my email is {this.email}
         <p>
           <input type="text" onInput={(e: any) => this.appSetFullName(e.target.value)} value={this.fullName.toString()}/>
+        </p>
+        <p>
+          <input type="text" onInput={(e: any) => this.appSetEmail(e.target.value)} value={this.email.toString()}/>
         </p>
       </div>
     );

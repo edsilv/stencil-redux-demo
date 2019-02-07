@@ -7,7 +7,8 @@ interface AppState {
 
 const getInitialState = () => {
   return {
-    fullName: new FullName('Edward', 'John', 'Silverton')
+    fullName: new FullName('Edward', 'John', 'Silverton'),
+    email: "e.silverton@gmail.com"
   }
 };
 
@@ -15,6 +16,9 @@ const app = (state: AppState = getInitialState(), action: ActionTypes) => {
   switch (action.type) {
     case TypeKeys.APP_SET_FULLNAME: {
       return { ...state, fullName: action.fullName }
+    }
+    case TypeKeys.APP_SET_EMAIL: {
+      return { ...state, email: action.email }
     }
   }
 

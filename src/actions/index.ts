@@ -1,5 +1,6 @@
 import {
-  AppSetFullNameAction
+  AppSetFullNameAction,
+  AppSetEmailAction
 } from './app';
 
 export interface NullAction {
@@ -10,11 +11,13 @@ export interface NullAction {
 export type ActionTypes =
   | NullAction
   | AppSetFullNameAction
+  | AppSetEmailAction
 ;
 
 export enum TypeKeys {
   // Won't match anything
   NULL = 'NULL',
   ERROR = 'ERROR',
-  APP_SET_FULLNAME = 'APP_SET_FULLNAME'
+  APP_SET_FULLNAME = 'APP_SET_FULLNAME',
+  APP_SET_EMAIL = 'APP_SET_EMAIL'
 };
